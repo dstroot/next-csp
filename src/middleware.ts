@@ -27,7 +27,7 @@ export function middleware(request: NextRequest) {
   // https://github.com/vercel/next.js/discussions/54907
   const cspHeader = `
     default-src 'self';
-    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' https: http: 'unsafe-inline' ${
+    script-src 'self' 'nonce-${nonce}' 'strict-dynamic' ${
     process.env.NODE_ENV === "production" ? "" : `'unsafe-eval'`
   };
     style-src 'self' 'unsafe-inline'; 
