@@ -4,6 +4,7 @@ import { Inter } from "next/font/google";
 import { headers } from "next/headers";
 import { ClientFunction } from "./ClientFunction";
 import { GoogleTagMgr } from "@/components/GoogleTagMgr";
+import { Analytics } from "@vercel/analytics/react";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,6 +24,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <>
+          <Analytics />
           <GoogleTagMgr nonce={nonce} />
           <ClientFunction nonce={nonce}>{children}</ClientFunction>
         </>
