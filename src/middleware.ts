@@ -55,12 +55,16 @@ export function middleware(request: NextRequest) {
   requestHeaders.set("X-Frame-Options", "SAMEORIGIN");
   // X-Content-Type-Options stops a browser from trying to MIME-sniff the content type and forces it to stick with the declared content-type. The only valid value for this header is "X-Content-Type-Options: nosniff".
   requestHeaders.set("X-Content-Type-Options", "nosniff");
-  requestHeaders.set("X-DNS-Prefetch-Control", "on");
+  // requestHeaders.set("X-DNS-Prefetch-Control", "on");
   // requestHeaders.set(
   //   "Strict-Transport-Security",
   //   "max-age=31536000; includeSubDomains; preload"
   // );
-  requestHeaders.set("Permissions-Policy", "microphone=(), geolocation=()");
+  // Permissions-Policy header blocks access to the camera, microphone and geolocation services.
+  requestHeaders.set(
+    "Permissions-Policy",
+    "camera=(), microphone=(), geolocation=()"
+  );
   // requestHeaders.set(
   //   "Access-Control-Allow-Origin",
   //   process.env.NODE_ENV === "production"
