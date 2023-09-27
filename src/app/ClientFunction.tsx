@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect } from "react";
+
 export const ClientFunction = ({
   nonce,
   children,
@@ -7,7 +9,13 @@ export const ClientFunction = ({
   nonce: string | null;
   children: React.ReactNode;
 }) => {
-  console.log(nonce);
+  console.log("Client: " + nonce);
+
+  useEffect(() => {
+    if (nonce) {
+      console.log("Client effect: " + nonce);
+    }
+  }, [nonce]);
 
   return (
     <>

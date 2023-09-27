@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const nonce = headers().get("x-nonce");
-  console.log(nonce);
+  // console.log(nonce);
 
   return (
     <html lang="en">
