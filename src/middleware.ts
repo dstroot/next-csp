@@ -37,6 +37,7 @@ export function middleware(request: NextRequest) {
     object-src 'none';
     base-uri 'self';
     form-action 'self';
+    frame-src 'self'
     frame-ancestors 'none';
     block-all-mixed-content;
     upgrade-insecure-requests;
@@ -48,6 +49,26 @@ export function middleware(request: NextRequest) {
     "Content-Security-Policy",
     cspHeader.replace(/\s{2,}/g, " ").trim()
   );
+
+  requestHeaders.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  requestHeaders.set("X-Frame-Options", "SAMEORIGIN");
+  requestHeaders.set("X-Content-Type-Options", "nosniff");
+  requestHeaders.set("X-DNS-Prefetch-Control", "on");
+  // requestHeaders.set(
+  //   "Strict-Transport-Security",
+  //   "max-age=31536000; includeSubDomains; preload"
+  // );
+  requestHeaders.set("Permissions-Policy", "microphone=(), geolocation=()");
+  // requestHeaders.set(
+  //   "Access-Control-Allow-Origin",
+  //   process.env.NODE_ENV === "production"
+  //     ? "'https://www.danstroot.com'"
+  //     : "'http://localhost:3000/'"
+  // );
+  requestHeaders.set("Vary", "Origin");
+  requestHeaders.set("Cross-Origin-Embedder-Policy", "unsafe-none");
+  requestHeaders.set("Cross-Origin-Opener-Policy", "same-origin");
+  requestHeaders.set("Cross-Origin-Resource-Policy", "cross-origin");
 
   return NextResponse.next({
     headers: requestHeaders,
