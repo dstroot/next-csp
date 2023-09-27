@@ -17,6 +17,7 @@ export default function RootLayout({
 }) {
   const nonce = headers().get("x-nonce");
   console.log(nonce);
+
   return (
     <html lang="en">
       <body className={inter.className}>{children}</body>
