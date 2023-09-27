@@ -49,9 +49,11 @@ export function middleware(request: NextRequest) {
     "Content-Security-Policy",
     cspHeader.replace(/\s{2,}/g, " ").trim()
   );
-
+  // Referrer Policy is a header that allows a site to control how much information the browser includes with navigations away from a document and should be set by all sites.
   requestHeaders.set("Referrer-Policy", "strict-origin-when-cross-origin");
+  // X-Frame-Options tells the browser whether you want to allow your site to be framed or not. By preventing a browser from framing your site you can defend against attacks like clickjacking.
   requestHeaders.set("X-Frame-Options", "SAMEORIGIN");
+  // X-Content-Type-Options stops a browser from trying to MIME-sniff the content type and forces it to stick with the declared content-type. The only valid value for this header is "X-Content-Type-Options: nosniff".
   requestHeaders.set("X-Content-Type-Options", "nosniff");
   requestHeaders.set("X-DNS-Prefetch-Control", "on");
   // requestHeaders.set(
@@ -66,8 +68,11 @@ export function middleware(request: NextRequest) {
   //     : "'http://localhost:3000/'"
   // );
   requestHeaders.set("Vary", "Origin");
+  // Cross-Origin Embedder Policy allows a site to prevent assets being loaded that do not grant permission to load them via CORS or CORP.
   requestHeaders.set("Cross-Origin-Embedder-Policy", "unsafe-none");
+  // Cross-Origin Opener Policy allows a site to opt-in to Cross-Origin Isolation in the browser.
   requestHeaders.set("Cross-Origin-Opener-Policy", "same-origin");
+  // Cross-Origin Resource Policy allows a resource owner to specify who can load the resource.
   requestHeaders.set("Cross-Origin-Resource-Policy", "cross-origin");
 
   return NextResponse.next({
