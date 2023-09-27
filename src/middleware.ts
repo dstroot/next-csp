@@ -30,6 +30,7 @@ export function middleware(request: NextRequest) {
     script-src 'self' 'nonce-${nonce}' 'strict-dynamic' ${
     process.env.NODE_ENV === "production" ? "" : `'unsafe-eval'`
   };
+    connect-src 'self' https://www.google-analytics.com;
     style-src 'self' 'unsafe-inline'; 
     img-src 'self' blob: data:;
     font-src 'self';

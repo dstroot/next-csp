@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { headers } from "next/headers";
 import { ClientFunction } from "./ClientFunction";
+import { GoogleTagMgr } from "@/components/GoogleTagMgr";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -16,12 +18,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const nonce = headers().get("x-nonce");
-  // console.log(nonce);
 
   return (
     <html lang="en">
       <body className={inter.className}>
-        <ClientFunction nonce={nonce}>{children}</ClientFunction>
+        <>
+          <GoogleTagMgr nonce={nonce} />
+          <ClientFunction nonce={nonce}>{children}</ClientFunction>
+        </>
       </body>
     </html>
   );
